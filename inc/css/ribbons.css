@@ -11,7 +11,6 @@ body {
   padding: 1px 0;
   background: #000;
   color: #eee;
-
   -moz-box-shadow: 0 0 10px rgba(0,0,0,0.5);
   -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5);
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
@@ -35,24 +34,18 @@ body {
   transform: rotate(45deg);
 }
 
-.ribbon a, 
-.ribbon a:visited, 
-.ribbon a:active, 
-.ribbon a:hover {
+.ribbon a, .ribbon a:visited, .ribbon a:active, .ribbon a:hover {
   display: block;
   padding: 1px 0;
   height: 24px;
   line-height: 24px;
-
   color: inherit;  
   text-align: center;
   text-decoration: none;
   font-family: 'Cabin Condensed', sans-serif;
   font-size: 16px;
   font-weight: 500;
-
   border: 1px solid rgba(255,255,255,0.3);
-
   -moz-text-shadow: 0 0 10px rgba(0,0,0,0.31);
   -webkit-text-shadow: 0 0 10px rgba(0,0,0,0.31);
   text-shadow: 0 0 10px rgba(0,0,0,0.31);
@@ -90,6 +83,7 @@ body {
   background: #eee;
   color: black;
 }
+
 .ribbon.white a {
   border: 2px dotted rgba(100,100,100,0.2);
 }
