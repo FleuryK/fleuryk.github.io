@@ -1,0 +1,91 @@
+/* #F9A825 */
+
+body {
+	background: linear-gradient(180deg, #0b0d12, #151a25) fixed;
+	color: #FFFFFF;
+}
+
+.card {
+	border-radius: 1rem;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+	background: #171923;
+	border: 1px solid #232838;
+	color: #FFFFFF;
+}
+
+.avatar-wrap {
+	position: relative;
+	width: 72px;
+	height: 72px;
+	border-radius: 50%;
+	overflow: visible; /* permet au dot de dépasser */
+	margin-top: 10px;
+}
+
+#discord-avatar {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 50%;
+	display: block;
+}
+
+.status-dot {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	transform: translate(5%, 5%);
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	border: 3px solid #0f1220; /* couleur du fond de ta carte */
+	background: #6b7280; /* offline par défaut */
+	box-shadow: 0 0 0 2px rgba(0,0,0,0.2);
+}
+
+.status-online  {
+	background: #22c55e !important;
+}
+
+.status-idle {
+	background: #f59e0b !important;
+}
+
+.status-dnd {
+	background: #ef4444 !important;
+}
+
+.status-offline {
+	background: #6b7280 !important;
+}
+
+#discord-status-text {
+	color: #9aa1b2;
+}
+
+#activity-status {
+	margin-top: 8px;
+}
+
+.activity {
+	margin-top: 8px;
+	color: #9aa1b2;
+	font-style: italic;
+	border-top: 1px solid #232838;
+}
+
+#jokeorquote {
+	border-left: 5px solid #F9A825;
+	padding: 15px;
+	margin-bottom: -5px;
+}
+
+.blockquote-footer {
+	margin-bottom: -.85em;
+}
+
+.weather-icon {
+	height: 2em;
+	width: auto;
+	margin-top: -3px;
+}
