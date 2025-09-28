@@ -1,7 +1,7 @@
 // ===== CONFIG =====
-const discordUserId = "130979396134633472";							// Remplace par ton ID Discord
-const githubUser = "fleuryk";										// Remplace par ton pseudo GitHub
-const apikeyopenweathermap = "a9088bf27eb6c3b98fcee65e29c5c010";	// Remplace par ta clé OpenWeatherMap
+const discordUserId = "130979396134633472";										// Remplace par ton ID Discord
+const githubUser = "fleuryk";													// Remplace par ton pseudo GitHub
+const apikeyopenweathermap = "YTkwODhiZjI3ZWI2YzNiOThmY2VlNjVlMjljNWMwMTA=";	// Remplace par ta clé OpenWeatherMap
 
 // ===== DISCORD =====
 const ws = new WebSocket("wss://api.lanyard.rest/socket");
@@ -257,7 +257,8 @@ afficherHeureFr(); // exécution immédiate au chargement
 
 // ===== WEATHER =====
 async function getWeather() {
-	const url = `https://api.openweathermap.org/data/2.5/weather?q=Rouen,FR&units=metric&lang=fr&appid=${apikeyopenweathermap}`;
+	const apikeyopenweathermapdecode = atob(apikeyopenweathermap);
+	const url = `https://api.openweathermap.org/data/2.5/weather?q=Rouen,FR&units=metric&lang=fr&appid=${apikeyopenweathermapdecode}`;
 	const res = await fetch(url);
 	const data = await res.json();
 
