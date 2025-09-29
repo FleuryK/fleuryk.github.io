@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>La Meute Normande &bull; &Eacute;v&eacute;nements</title>
+		<link rel="stylesheet" href="inc/css/style.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.5/main.min.css">
+	</head>
+
+	<body>
+		<header>
+			<h1><img src="inc/img/logo_la_meute_normande_rond.png" alt="Logo La Meute Normande" style="width: 10%;"></h1>
+			<nav>
+				<ul>
+					<li><a href="./">Accueil</a></li>
+					<li><a href="galerie.html">Galerie</a></li>
+					<li><a href="./#events">&Eacute;v&eacute;nements</a></li>
+					<li><a href="reglement.html">R&egrave;glement</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main>
+			<section class="hero">
+				<h2>&Eacute;v&eacute;nements</h2>
+				<p>Nos prochains &eacute;v&eacute;nements ou nous serons pr&eacute;sents</p>
+			</section>
+
+			<section class="events" id="events">
+				<div id="full-calendar"></div>
+
+				<!-- Modal -->
+				<div id="event-modal" class="custom-modal">
+					<div class="custom-modal-content">
+						<div class="custom-modal-header">
+							<h2 id="modal-title"></h2>
+							<span class="custom-close">&times;</span>
+						</div>
+						<div class="custom-modal-body">
+							<p><strong>📅&nbsp; D&eacute;but de l&#039;&eacute;v&eacute;nement :</strong> <span id="modal-start-date"></span> <span id="modal-start-time"></span></p>
+							<p><strong>📅&nbsp; Fin de l&#039;&eacute;v&eacute;nement :</strong> <span id="modal-end-date"></span> <span id="modal-end-time"></span></p>
+							<hr />
+							<p><strong>📍&nbsp; Lieu de l&#039;&eacute;v&eacute;nement :</strong> <a id="modal-location" href="#" target="_blank">Voir sur Google Maps</a></p>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer>
+			<p>&copy; 2025 La Meute Normande - Tous droits r&eacute;serv&eacute;s</p>
+		</footer>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.5/main.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.5/locales/fr.js"></script>
+		<script type="text/javascript" src="inc/calendar/packages/bootstrap5/index.global.js"></script>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				var calendarEl = document.getElementById('full-calendar');
+				var modal = document.getElementById("event-modal");
+				var closeModal = document.querySelector(".custom-close");
+				var closeModalBtn = document.getElementById("close-modal");
+
+				// S'assurer que le modal est bien caché au départ
+				modal.classList.remove("show", "hide");
+
+				var calendar = new FullCalendar.Calendar(calendarEl, {
+					headerToolbar: {
+						left: 'prev,next today',
+						center: 'title',
+						right: '',
+					},
+					footerToolbar: {
+						left: '',
+						center: 'dayGridMonth,timeGridWeek',
+						right: '',
+					},
+					nowIndicator: true,
+					displayEventTime: false,
+					locale: 'fr',
+					initialView: 'dayGridMonth',
+					events: 'inc/events.json', // Charger les événements depuis un fichier JSON
+					eventClick: function(info) {
+						document.getElementById("modal-title").textContent = info.event.title;
+						document.getElementById("modal-start-date").textContent = new Date(info.event.start).toLocaleDateString("fr-FR");
+						document.getElementById("modal-end-date").textContent = new Date(info.event.end).toLocaleDateString("fr-FR");
+
+						let startTime = info.event.start ? new Date(info.event.start).toLocaleTimeString("fr-FR", { hour: '2-digit', minute: '2-digit' }) : "Non précisé";
+						let endTime = info.event.end ? new Date(info.event.end).toLocaleTimeString("fr-FR", { hour: '2-digit', minute: '2-digit' }) : "Non précisé";
+						document.getElementById("modal-start-time").textContent = `${startTime}`;
+						document.getElementById("modal-end-time").textContent = `${endTime}`;
+
+						document.getElementById("modal-location").href = `https://www.google.com/maps/?q=${info.event.extendedProps.location}`;
+						document.getElementById("modal-location").textContent = info.event.extendedProps.location;
+
+						// Afficher le modal avec animation
+						modal.style.display = "flex";
+						modal.classList.remove("hide");
+						modal.classList.add("show");
+					},
+					eventColor: '#FF9900',
+					eventTextColor: '#000000'
+				});
+
+				calendar.render();
+
+				// Fonction pour fermer le modal avec animation
+				function closeModalFunction() {
+					modal.classList.remove("show");
+					modal.classList.add("hide");
+
+					setTimeout(() => {
+						modal.style.display = "none";
+					}, 300); // Correspond à la durée de l'animation CSS
+				}
+
+				closeModal.onclick = closeModalFunction;
+
+				window.onclick = function(event) {
+					if (event.target == modal) {
+						closeModalFunction();
+					}
+				};
+			});
+		</script>
+	</body>
+</html>

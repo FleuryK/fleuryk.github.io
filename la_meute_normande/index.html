@@ -1,1 +1,78 @@
-Il arrive !!!
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>La Meute Normande &bull; Accueil - Bienvenue sur le site de la meute Normande</title>
+		<link rel="stylesheet" href="./inc/css/style.css">
+	</head>
+
+	<body>
+		<header>
+			<h1><img src="./inc/img/logo_la_meute_normande_rond.png" alt="Logo La Meute Normande" style="width: 10%;"></h1>
+			<nav>
+				<ul>
+					<li><a href="./">Accueil</a></li>
+					<li><a href="./galerie.html">Galerie</a></li>
+					<li><a href="#events">&Eacute;v&eacute;nements</a></li>
+					<li><a href="./reglement.html">R&egrave;glement</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main>
+			<section class="hero">
+				<h2>Bienvenue sur La Meute Normande</h2>
+				<p>Un site d&eacute;di&eacute; aux passionn&eacute;s du monde Furry en Normandie.</p>
+			</section>
+
+			<section class="events" id="events">
+				<h2>Nos 2 prochains &eacute;v&eacute;nements</h2>
+				<div class="events-container" id="events-list"></div>
+
+				<a href="./evenements.html" class="btn-events">Voir tous nos &eacute;v&eacute;nements</a>
+			</section>
+		</main>
+
+		<footer>
+			<p>&copy; 2025 La Meute Normande - Tous droits r&eacute;serv&eacute;s</p>
+		</footer>
+		
+		<script type="text/javascript">
+			document.addEventListener("DOMContentLoaded", function () {
+				fetch("inc/events.json")
+					.then(response => response.json())
+					.then(events => {
+						let now = new Date();
+						
+						// Filtrer les événements futurs
+						let upcomingEvents = events
+							.filter(event => new Date(event.start) > now)
+							.sort((a, b) => new Date(a.start) - new Date(b.start)) // Trier par date
+							.slice(0, 2); // Garder uniquement les 2 premiers
+		
+						let eventsContainer = document.getElementById("events-list");
+						eventsContainer.innerHTML = ""; // Nettoyer la section
+		
+						if (upcomingEvents.length > 0) {
+							upcomingEvents.forEach(event => {
+								let eventCard = document.createElement("div");
+								eventCard.classList.add("event");
+		
+								eventCard.innerHTML = `
+									<h3>${event.title}</h3>
+									<p>📅 Date : du ${new Date(event.start).toLocaleDateString("fr-FR")} au ${new Date(event.end).toLocaleDateString("fr-FR")}</p>
+									<p>📍 Lieu : <a href="https://www.google.com/maps/?q=${event.location || "Non sp&eacute;cifi&eacute;"}" onclick="window.open(this.href); return false;"> ${event.location || "Non sp&eacute;cifi&eacute;"} </a></p>
+								`;
+		
+								eventsContainer.appendChild(eventCard);
+							});
+						} else {
+							eventsContainer.innerHTML = "<p>Aucun &eacute;v&eacute;nement &agrave; venir.</p>";
+						}
+					})
+					.catch(error => console.error("Erreur lors du chargement des événements :", error));
+			});
+		</script>
+	</body>
+</html>
