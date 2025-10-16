@@ -1,4 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
 
 @font-face {
 	font-family: 'pr_vikingregular';
@@ -17,9 +17,9 @@ html {
 /* Général */
 body {
 	/* font-family: "Sriracha", sans-serif; */
-	font-family: "pr_vikingregular", sans-serif;
+	/* font-family: "pr_vikingregular", sans-serif;
 	font-weight: 400;
-	font-style: normal;
+	font-style: normal; */
 	margin: 0;
 	padding: 0;
 	background: linear-gradient(to bottom, #FF4500, #FF9900, #FFCC00);
@@ -47,6 +47,9 @@ nav ul {
 }
 
 nav ul li {
+	font-family: "pr_vikingregular", sans-serif;
+	font-weight: 400;
+	font-style: normal;
 	display: inline;
 	margin: 0 15px;
 }
@@ -58,6 +61,12 @@ nav a, nav a:hover {
 }
 
 /* Section principale */
+main {
+	font-family: "Sriracha", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
 .hero {
 	padding: 50px;
 	color: #000000;
@@ -256,6 +265,9 @@ nav a, nav a:hover {
 
 /* Footer */
 footer {
+	font-family: "Sriracha", sans-serif;
+	font-weight: 400;
+	font-style: normal;
 	background: rgba(0, 0, 0, 0.8);
 	padding: 10px;
 	margin-top: 20px;
