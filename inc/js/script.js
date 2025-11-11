@@ -169,7 +169,9 @@ fetch(`https://api.github.com/users/${githubUser}/events/public`)
 		switch (lastEvent.type) {
 			case "PushEvent":
 				const commits = Array.isArray(lastEvent.payload.commits) ? lastEvent.payload.commits.length : 0;
-				action = `A push ${commits} commit(s)`;
+				action = commits > 0
+					? `A push ${commits} commit(s)`
+					: "A push action (no commits)";
 				break;
 			case "CreateEvent":
 				action = "A created a repository or a branch";
