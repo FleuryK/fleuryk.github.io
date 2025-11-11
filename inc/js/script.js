@@ -168,26 +168,27 @@ fetch(`https://api.github.com/users/${githubUser}/events/public`)
 		let action = "";
 		switch (lastEvent.type) {
 			case "PushEvent":
-				action = `A push ${lastEvent.payload.commits.length} commit(s)`;
-			break;
+				const commits = Array.isArray(lastEvent.payload.commits) ? lastEvent.payload.commits.length : 0;
+				action = `A push ${commits} commit(s)`;
+				break;
 			case "CreateEvent":
 				action = "A created a repository or a branch";
-			break;
+				break;
 			case "IssuesEvent":
 				action = `A issue ${lastEvent.payload.action} `;
-			break;
+				break;
 			case "IssueCommentEvent":
 				action = `A commented on an issue`;
-			break;
+				break;
 			case "PullRequestEvent":
 				action = `A ${lastEvent.payload.action} pull request`;
-			break;
+				break;
 			case "WatchEvent":
 				action = "A star the repo";
-			break;
+				break;
 			case "ForkEvent":
 				action = "A fork the repo";
-			break;
+				break;
 			default:
 				action = `Made an action (${lastEvent.type})`;
 		}
